@@ -1,0 +1,24 @@
+Whats the project?
+Its a simple web application with few web pages to test spring security authenticated against CAS server
+
+How to run?
+
+
+How its deployed?
+
+
+How to measure if the results are successful or not?
+
+
+
+
+
+Leaning points and errors encountered:
+- Incorrect spring context file naming. It should always bee "<dispatcher_servlet_name>-servlet.xml"
+- Incorrect filterChain configuration should be always named "springSecurityFilterChain"
+- You can have multiple context files and can be split from servlet definition
+- Spring security form need to follow this rules
+  * Action should point to "j_spring_security_check"
+  * Username and Password needs to be named "j_username" and "j_password"
+  * You need to use "name" attribute of the input element for above input fields naming.
+- To
