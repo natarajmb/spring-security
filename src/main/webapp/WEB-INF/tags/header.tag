@@ -9,12 +9,15 @@
 <div>
     <nav>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/homepage.do">Secure Vault</a></li>
+            <li><a href="${pageContext.request.contextPath}/home.do">Secure Vault</a></li>
             <sec:authorize access="isAnonymous()">
-                <li class="right"><a href="${pageContext.request.contextPath}/loginpage.do">Login</a></li>
+                <li class="right"><a href="${pageContext.request.contextPath}/login.do">Login</a></li>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-                <li class="right"><a href="${pageContext.request.contextPath}/logoutpage.do">Logout</a></li>
+            <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
+                <li class="right"><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li class="right"><a href="${pageContext.request.contextPath}/secure/admin/admin.do">Admin</a></li>
             </sec:authorize>
         </ul>
     </nav>
