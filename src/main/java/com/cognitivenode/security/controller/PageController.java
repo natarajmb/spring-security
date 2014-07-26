@@ -6,7 +6,7 @@
  * unless otherwise indicated for stand-alone materials.
  */
 
-package com.cognitivenode.cas.controller;
+package com.cognitivenode.security.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -12,7 +12,7 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
-    <display-name>CAS with Spring Security</display-name>
+    <display-name>Spring Security sample application</display-name>
 
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
@@ -70,6 +70,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/homepage.do</welcome-file>
+        <welcome-file>/home.do</welcome-file>
     </welcome-file-list>
 </web-app>

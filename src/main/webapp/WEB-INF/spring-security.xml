@@ -21,6 +21,7 @@
         <security:logout logout-success-url="/login.do" />
     </security:http>
 
+    <!-- In file/memory authentication -->
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
@@ -29,5 +30,15 @@
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <!-- JDBC security authentication -->
+
+    <!-- JPA & Hibernate authentication -->
+
+    <!-- Embedded LDAP authentication -->
+
+    <!-- External LDAP authentication -->
+
+    <!-- CAS authentication -->
 
 </beans>
