@@ -28,10 +28,15 @@
                 <td><input type="password" name="j_password" onfocus="resetMessages()"/></td>
             </tr>
             <tr>
+                <td><label>Remember me</label></td>
+                <td><input type="checkbox" name="_spring_security_remember_me" onfocus="resetMessages()" value="true"/></td>
+            </tr>
+
+            <tr>
                 <td></td>
                 <td text-align="center">
                     <input type="submit" value="Submit"
-                           class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button""/>
+                           class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button"/>
                 </td>
             </tr>
         </table>

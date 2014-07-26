@@ -19,6 +19,7 @@
         <security:intercept-url pattern="/secure/**" access="isAuthenticated()" />
         <security:form-login login-page="/login.do" default-target-url="/secure/authenticated.do" authentication-failure-url="/login.do?error=true" />
         <security:logout logout-success-url="/login.do" />
+        <security:remember-me key="secureVault" />
     </security:http>
 
     <!-- In file/memory authentication -->
