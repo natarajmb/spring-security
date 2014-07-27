@@ -1,15 +1,59 @@
-Whats the project?
-Its a simple web application with few web pages to test spring security authenticated against CAS server
+1. Whats the project?
+Its a simple web application with few web pages to test spring security using different back ends.
+Its a organic growth on the project and am using following solutions.
+- In file
+- In Memory
+- JDBC
+- JAP with Hibernate
+- Embedded LDAP
+- External LDAP
+- CAS authentication
 
-How to run?
 
+2. How to run/deployed?
 
-How its deployed?
+To run or deploy the project, make sure you have tomcat 7 installed and running with following credentials in tomcat-users.xml
 
+  <role rolename="manager-gui"/>
+  <user username="tomcat" password="s3cret" roles="manager-gui"/>
 
-How to measure if the results are successful or not?
+then run the following maven goal
+"mvn package tomcat7:deploy" - to deploy for the first time
+"mvn package tomcat7:redeploy" - to redeploy after changes
 
+You should be able to see the project running on
+http://localhost:8080/spring-security/
 
+3. How to test each sub projects?
+
+To test remember me functionality
+---------------------------------
+0. Enable the in-file section of http tag in security xml and comment out rest of the http tags in the file
+1. Add the remember me tag in security xml with "key" as a salt to encrypt
+2. Add the remember me checkbox with specific name for a input type
+3. Lower the session time out say to 1min to test
+
+Testing:
+1. Start the application login as user with remember me ticked
+2. Wait for few minutes and refresh the page, you should still be logged in.
+
+Negative testing:
+1. Start the application login as user without remember me ticked
+2. wait for few minutes and refresh the page, you would be asked to login again.
+
+To test JDBC functionality
+--------------------------
+0. Enable the jdbc section of the http tag in security xml and comment out rest of the http tags
+1. Check if the every required dependency in pom.xml is uncommented required for the JDBC testing.
+   Note: All dependencies are grouped on functionality so it should be enabled by default. But cross check
+2. Create the data base required using the script "jdbc_sql_script.sql"
+3. Load the data into the created database from the sample file "jdbc_sql_sample_data.sql"
+4. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
+5. Compile and deploy the application
+
+Testing:
+1. Star the application and login as the user from the sample data set
+2. If you are able to login everything works as required
 
 
 
@@ -20,5 +64,5 @@ Leaning points and errors encountered:
 - Spring security form need to follow this rules
   * Action should point to "j_spring_security_check"
   * Username and Password needs to be named "j_username" and "j_password"
+  * If remember me functionality is used then the file name should be "_spring_security_remember_me"
   * You need to use "name" attribute of the input element for above input fields naming.
-- To
