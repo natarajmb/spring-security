@@ -21,6 +21,7 @@
         <spring-version>4.0.0.RELEASE</spring-version>
         <spring-secutiry-version>3.2.0.RELEASE</spring-secutiry-version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
+        <hibernate-version>4.3.0.CR1</hibernate-version>
     </properties>
 
     <dependencies>
@@ -100,6 +101,22 @@
             <version>${mysql.connector.version}</version>
         </dependency>
 
+        <!-- spring security JPA/Hibernate support-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.4.3.RELEASE</version>
+        </dependency>
 
     </dependencies>
 

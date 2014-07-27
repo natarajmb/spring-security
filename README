@@ -49,11 +49,15 @@ To test JDBC functionality
 2. Create the data base required using the script "jdbc_sql_script.sql"
 3. Load the data into the created database from the sample file "jdbc_sql_sample_data.sql"
 4. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
-5. Compile and deploy the application
+5. Adjust the authentication provider to point to the dataSource reference and add users-by-username-query and authorities-by-username-query property
+6. Compile and deploy the application
 
 Testing:
 1. Star the application and login as the user from the sample data set
 2. If you are able to login everything works as required
+
+To test JPA/Hibernate functionality
+-----------------------------------
 
 
 
