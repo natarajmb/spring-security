@@ -6,7 +6,7 @@
  * unless otherwise indicated for stand-alone materials.
  */
 
-package com.cognitivenode.security.dao;
+package com.cognitivenode.security.repository;
 
 import com.cognitivenode.security.model.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @author nataraj.basappa
  * @version 1.0, 27/07/2014
  */
-public interface AuthorityJpaDAO extends JpaRepository<Authority, Long>, JpaSpecificationExecutor<Authority> {
+public interface AuthorityRepository extends JpaRepository<Authority, Long>, JpaSpecificationExecutor<Authority> {
 
     Authority findByName(final String name);
 }

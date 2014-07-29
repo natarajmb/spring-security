@@ -21,34 +21,40 @@ public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long id;
+    @Column(name = "USER_ROLE_ID")
+    private Long Id;
 
-    @Column
-    private String name;
+    @Column(name = "USERNAME")
+    private String username;
+
+    @Column(name = "ROLE")
+    private String role;
 
     public Authority() {
         super();
     }
 
-    public Authority(String name) {
-        super();
-        this.name = name;
-    }
-
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

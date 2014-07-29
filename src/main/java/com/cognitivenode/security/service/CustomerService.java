@@ -6,12 +6,11 @@
  * unless otherwise indicated for stand-alone materials.
  */
 
-package com.cognitivenode.security.facade;
+package com.cognitivenode.security.service;
 
 import com.cognitivenode.security.model.Authority;
 import com.cognitivenode.security.model.User;
-import com.cognitivenode.security.service.UserService;
-import com.cognitivenode.security.service.impl.UserServiceImpl;
+import com.cognitivenode.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -34,19 +33,19 @@ import java.util.Set;
 public class CustomerService implements UserDetailsService {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final User foundUser = userService.findByName(username);
+        final User foundUser = userRepository.findByUsername(username);
         final Set<Authority> authorities = foundUser.getAuthorities();
 
-        final List<String> listOfAuthorities = new ArrayList<String>();
+        final List<String> listOfAuthorities = new ArrayList<>();
         for (Authority authority : authorities) {
-            listOfAuthorities.add(authority.getName());
+            listOfAuthorities.add(authority.getRole());
         }
 
-        final List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList((String[]) listOfAuthorities.toArray());
+        final List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList(listOfAuthorities.toArray(new String[listOfAuthorities.size()]));
         return new org.springframework.security.core.userdetails.User(username, foundUser.getPassword(), grantedAuthorities);
     }
 }

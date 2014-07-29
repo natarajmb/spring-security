@@ -22,47 +22,38 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
-    private Long id;
+    @Column(name = "USERNAME", unique = true, nullable = false)
+    private String username;
 
-    @Column(unique = true, nullable = false)
-    private String name;
-
-    @Column(nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "AUTHORITY_ID")}
+            joinColumns = {@JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "USER_ROLE_ID")}
     )
     private Set<Authority> authorities;
+
+    @Column(name = "ENABLED", nullable = false)
+    private boolean enabled = true;
 
     public User() {
         super();
     }
 
-    public User(String name, String password, Set<Authority> authorities) {
-        this.name = name;
+    public User(String username, String password, Set<Authority> authorities) {
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -79,5 +70,13 @@ public class User {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

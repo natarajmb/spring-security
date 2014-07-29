@@ -43,7 +43,7 @@ Negative testing:
 
 To test JDBC functionality
 --------------------------
-0. Enable the jdbc section of the http tag in security xml and comment out rest of the http tags
+0. Enable the JDBC section of the http tag in security xml and comment out rest of the http tags
 1. Check if the every required dependency in pom.xml is uncommented required for the JDBC testing.
    Note: All dependencies are grouped on functionality so it should be enabled by default. But cross check
 2. Create the data base required using the script "jdbc_sql_script.sql"
@@ -58,7 +58,14 @@ Testing:
 
 To test JPA/Hibernate functionality
 -----------------------------------
+0. Enable the JPA/Hibernate section of the security xml and comment out rest of the http tags
+1. Enable the Spring JPA section of the dispatcherServlet.xml
+2. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
+3. Compile and deploy, should you see the database dropped and created with sample data loaded
 
+Testing:
+1. Star the application and login as the user from the sample data set jpa_sample_data.sql
+2. If you are able to login everything works as required
 
 
 Leaning points and errors encountered:
@@ -70,3 +77,6 @@ Leaning points and errors encountered:
   * Username and Password needs to be named "j_username" and "j_password"
   * If remember me functionality is used then the file name should be "_spring_security_remember_me"
   * You need to use "name" attribute of the input element for above input fields naming.
+- JPA is easier to implement with Spring Data which takes away the pain of boiler plate code.
+  * Make sure the names of the method matches the entity variable name else you will get this error "No property name found for type"
+- Automatic data load using JPA was bit challenging as it requires the data set i.e. SQL script to be on each line

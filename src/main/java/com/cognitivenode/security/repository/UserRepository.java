@@ -6,7 +6,7 @@
  * unless otherwise indicated for stand-alone materials.
  */
 
-package com.cognitivenode.security.dao;
+package com.cognitivenode.security.repository;
 
 import com.cognitivenode.security.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,12 +15,14 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * DAO for spring security user objects
  * <p/>
- * Note: Not required to implement the interface as it auto created by spring
+ * Note: Not required to implement the interface as its auto created by spring
  *
  * @author nataraj.basappa
  * @version 1.0, 27/07/2014
  */
 
-public interface UserJpaDAO extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
-    User findByName(final String name);
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+
+    User findByUsername(final String username);
+
 }
