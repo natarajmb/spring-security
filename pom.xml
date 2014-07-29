@@ -99,6 +99,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- spring security JPA/Hibernate support-->
