@@ -19,6 +19,7 @@ import java.util.Set;
  */
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -29,7 +30,7 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
+    @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")},
             inverseJoinColumns = {@JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "USER_ROLE_ID")}
     )

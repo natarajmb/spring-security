@@ -17,6 +17,7 @@ import javax.persistence.*;
  * @version 1.0, 27/07/2014
  */
 @Entity
+@Table(name = "roles")
 public class Authority {
 
     @Id

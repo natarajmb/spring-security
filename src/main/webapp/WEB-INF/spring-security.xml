@@ -20,7 +20,14 @@
         <security:form-login login-page="/login.do" default-target-url="/secure/authenticated.do"
                              authentication-failure-url="/login.do?error=true"/>
         <security:logout logout-success-url="/login.do"/>
-        <!--<security:remember-me key="secureVault" user-service-ref="customerService"/>-->
+        <!-- In file/memory -->
+        <!--<security:remember-me key="secureVault" />-->
+
+        <!-- JDBC-->
+        <!--<security:remember-me key="secureVault" data-source-ref="dataSource"/>-->
+
+        <!-- JPA & Hibernate -->
+        <security:remember-me services-ref="rememberMeServices"/>
     </security:http>
 
     <!-- In file/memory authentication -->
@@ -47,9 +54,32 @@
     -->
 
     <!-- JPA & Hibernate authentication -->
-    <security:authentication-manager>
+    <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider user-service-ref="customerService"/>
+        <security:authentication-provider ref="rememberMeAuthenticationProvider"/>
     </security:authentication-manager>
+
+    <bean id="rememberMeAuthenticationProvider" class=
+            "org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <constructor-arg value="secureVault"/>
+    </bean>
+
+    <bean id="rememberMeFilter" class=
+            "org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <constructor-arg ref="authenticationManager"/>
+        <constructor-arg ref="rememberMeServices"/>
+    </bean>
+
+    <bean id="rememberMeServices"
+          class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+        <constructor-arg value="secureVault"/>
+        <constructor-arg ref="customerService"/>
+        <constructor-arg ref="tokenRepository"/>
+    </bean>
+
+    <bean id="tokenRepository"
+          class="com.cognitivenode.security.repository.impl.RememberMeTokenRepositoryImpl">
+    </bean>
 
     <!-- Embedded LDAP authentication -->
 

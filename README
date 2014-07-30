@@ -26,12 +26,13 @@ http://localhost:8080/spring-security/
 
 3. How to test each sub projects?
 
-To test remember me functionality
----------------------------------
-0. Enable the in-file section of http tag in security xml and comment out rest of the http tags in the file
-1. Add the remember me tag in security xml with "key" as a salt to encrypt
-2. Add the remember me checkbox with specific name for a input type
-3. Lower the session time out say to 1min to test
+To test In file/memory functionality
+------------------------------------
+1. Enable the in-file section of authentication-manager in security xml and comment out rest of the authentication-manager sections in the file
+2. Enable In file/memory section of the http tag in security xml
+3. Add the remember me tag in security xml with "key" as a salt to encrypt
+4. Add the remember me checkbox with specific name for a input type
+5. Lower the session time out say to 1min to test
 
 Testing:
 1. Start the application login as user with remember me ticked
@@ -43,25 +44,32 @@ Negative testing:
 
 To test JDBC functionality
 --------------------------
-0. Enable the JDBC section of the http tag in security xml and comment out rest of the http tags
-1. Check if the every required dependency in pom.xml is uncommented required for the JDBC testing.
+1. Enable the JDBC section of authentication-manager in security xml and comment out rest of the authentication-manager sections in the file
+2. Enable JDBC section of the http tag in security xml
+3. Check if the every required dependency in pom.xml is uncommented required for the JDBC testing.
    Note: All dependencies are grouped on functionality so it should be enabled by default. But cross check
-2. Create the data base required using the script "jdbc_sql_script.sql"
-3. Load the data into the created database from the sample file "jdbc_sql_sample_data.sql"
-4. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
-5. Adjust the authentication provider to point to the dataSource reference and add users-by-username-query and authorities-by-username-query property
-6. Compile and deploy the application
+4. Create the data base required using the script "jdbc_sql_script.sql"
+5. Load the data into the created database from the sample file "jdbc_sql_sample_data.sql"
+6. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
+7. Adjust the authentication provider to point to the dataSource reference and add users-by-username-query and authorities-by-username-query property
+8. Compile and deploy the application
 
 Testing:
 1. Star the application and login as the user from the sample data set
 2. If you are able to login everything works as required
 
+NOTE: To get this working comment following stuff
+1. Following line from dispatcherServlet.xml
+   <jpa:repositories base-package="com.cognitivenode.security.repository"/>
+2. Remove package "com.cognitivenode.security.service" from context:component-scan
+
 To test JPA/Hibernate functionality
 -----------------------------------
-0. Enable the JPA/Hibernate section of the security xml and comment out rest of the http tags
-1. Enable the Spring JPA section of the dispatcherServlet.xml
-2. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
-3. Compile and deploy, should you see the database dropped and created with sample data loaded
+1. Enable the JPA/Hibernate section of authentication-manager in security xml and comment out rest of the authentication-manager sections in the file
+2. Enable JPA/Hibernate section of the http tag in security xml
+3. Enable the Spring JPA section of the dispatcherServlet.xml
+4. Adjust the dataSource bean in dispatcherServlet.xml to match your defined database and credentials
+5. Compile and deploy, should you see the database dropped and created with sample data loaded
 
 Testing:
 1. Star the application and login as the user from the sample data set jpa_sample_data.sql
@@ -80,3 +88,9 @@ Leaning points and errors encountered:
 - JPA is easier to implement with Spring Data which takes away the pain of boiler plate code.
   * Make sure the names of the method matches the entity variable name else you will get this error "No property name found for type"
 - Automatic data load using JPA was bit challenging as it requires the data set i.e. SQL script to be on each line
+- Remember me functionality with secure token was challenging to implement and required following steps
+  * Create a Entity to hold the persistence tokens
+  * Implement a class to support PersistentTokenRepository for your desired back end in this case JPA & Hibernate
+  * Define a bean tokenRepository with the above created class and wire it into remember me service (PersistentTokenBasedRememberMeServices)
+  * Add a filter to filter and a provider to detect the token and auto login the user.
+  * Make sure you use the same "key" i.e. salt value for both PersistentTokenBasedRememberMeServices & RememberMeAuthenticationProvider

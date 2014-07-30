@@ -22,3 +22,11 @@ CREATE TABLE user_roles (
   UNIQUE KEY uni_username_role (ROLE,username),
   KEY fk_username_idx (username),
   CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
+
+# create remember me table
+CREATE TABLE persistent_logins (
+  username VARCHAR(45) NOT NULL,
+  series VARCHAR(64) PRIMARY KEY,
+  token VARCHAR(64) NOT NULL,
+  last_used TIMESTAMP NOT NULL
+);
