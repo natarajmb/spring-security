@@ -86,6 +86,21 @@ Testing:
 1. Star the application and login as the user from the sample data set users.ldif
 2. If you are able to login everything works as required except remember me functionality
 
+To test External LDAP functionality
+-----------------------------------
+1. Enable the External LDAP section of authentication-manager in security xml and comment out rest of the authentication-manager sections in the file
+2. Remember me functionality has to be used either from JDBC or JPA implementation (see overview section about LDAP - http://docs.spring.io/spring-security/site/docs/3.0.x/reference/remember-me.html)
+3. Comment out Spring JPA and JDBC dataSource definition section of the dispatcherServlet.xml
+5. Compile and deploy
+
+Testing:
+1. Install ApacheDS server and Apache Directory Studio (ADS) locally on your environment
+2. Login to the ADS using "simple authentication" with credentials "uid=admin, ou=system" and password "secret"
+3. Create a partition with id "cognitivenode" and suffix "dc=cognitivenode,dc=com" and restart the ApacheDS server
+   ***** Restarting of the ApacheDS after adding partition is important if not this wont work ******
+4. Import the users.ldif file from the resources folder
+5. Test the application by logging in as user defined in users.ldif
+
 
 Leaning points and errors encountered:
 - Incorrect spring context file naming. It should always bee "<dispatcher_servlet_name>-servlet.xml"

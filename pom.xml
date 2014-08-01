@@ -125,6 +125,7 @@
             <artifactId>spring-security-ldap</artifactId>
             <version>${spring-secutiry-version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.directory.server</groupId>
             <artifactId>apacheds-core</artifactId>
@@ -136,7 +137,9 @@
             <artifactId>apacheds-protocol-ldap</artifactId>
             <version>${apacheds-version}</version>
             <scope>runtime</scope>
-        </dependency></dependencies>
+        </dependency>
+        -->
+    </dependencies>
 
     <build>
         <finalName>spring-security</finalName>
