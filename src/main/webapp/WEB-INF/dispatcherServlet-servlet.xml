@@ -22,22 +22,26 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
-    <context:component-scan base-package="com.cognitivenode.security.controller, com.cognitivenode.security.service"/>
-    <jpa:repositories base-package="com.cognitivenode.security.repository"/>
+    <context:component-scan base-package="com.cognitivenode.security.controller"/>
+    <!--<context:component-scan base-package="com.cognitivenode.security.controller, com.cognitivenode.security.service"/>-->
+    <!--<jpa:repositories base-package="com.cognitivenode.security.repository"/>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/spring_security_jdbc"/>
         <property name="username" value="ss"/>
         <property name="password" value="password"/>
     </bean>
+    -->
 
     <!-- Spring JPA configuration -->
+    <!--
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.cognitivenode.security.model"/>
@@ -62,5 +66,6 @@
 
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    -->
     <!-- end of Spring JPA configuration -->
 </beans>

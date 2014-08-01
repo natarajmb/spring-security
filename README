@@ -75,6 +75,17 @@ Testing:
 1. Star the application and login as the user from the sample data set jpa_sample_data.sql
 2. If you are able to login everything works as required
 
+To test Embedded LDAP functionality
+-----------------------------------
+1. Enable the Embedded LDAP section of authentication-manager in security xml and comment out rest of the authentication-manager sections in the file
+2. Remember me functionality has to be used either from JDBC or JPA implementation (see overview section about LDAP - http://docs.spring.io/spring-security/site/docs/3.0.x/reference/remember-me.html)
+3. Comment out Spring JPA and JDBC dataSource definition section of the dispatcherServlet.xml
+5. Compile and deploy
+
+Testing:
+1. Star the application and login as the user from the sample data set users.ldif
+2. If you are able to login everything works as required except remember me functionality
+
 
 Leaning points and errors encountered:
 - Incorrect spring context file naming. It should always bee "<dispatcher_servlet_name>-servlet.xml"
@@ -94,3 +105,4 @@ Leaning points and errors encountered:
   * Define a bean tokenRepository with the above created class and wire it into remember me service (PersistentTokenBasedRememberMeServices)
   * Add a filter to filter and a provider to detect the token and auto login the user.
   * Make sure you use the same "key" i.e. salt value for both PersistentTokenBasedRememberMeServices & RememberMeAuthenticationProvider
+- Remember me functionality implemented in JPA or JDBC needs to be reused for LDAP authentication (see overview section about LDAP - http://docs.spring.io/spring-security/site/docs/3.0.x/reference/remember-me.html)

@@ -1,0 +1,58 @@
+dn: ou=people,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: ou=roles,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: roles
+
+# Users
+
+dn: uid=admin3,ou=people,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+sn: Admin3
+cn: Admin3
+uid: admin3
+userPassword: nimda
+
+dn: uid=admin4,ou=people,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+sn: Admin4
+cn: Admin4
+uid: admin4
+userPassword: nimda
+
+dn: uid=test3,ou=people,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+sn: Test3
+cn: Test3
+uid: test3
+userPassword: test1234
+
+# Roles
+
+dn: cn=USER,ou=roles,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: USER
+member: uid=admin3,ou=people,dc=cognitivenode,dc=com
+member: uid=admin4,ou=people,dc=cognitivenode,dc=com
+member: uid=test3,ou=people,dc=cognitivenode,dc=com
+
+dn: cn=ADMIN,ou=roles,dc=cognitivenode,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: ADMIN
+member: uid=admin3,ou=people,dc=cognitivenode,dc=com
+member: uid=admin4,ou=people,dc=cognitivenode,dc=com

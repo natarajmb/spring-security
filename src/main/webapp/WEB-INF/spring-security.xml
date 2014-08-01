@@ -27,7 +27,7 @@
         <!--<security:remember-me key="secureVault" data-source-ref="dataSource"/>-->
 
         <!-- JPA & Hibernate -->
-        <security:remember-me services-ref="rememberMeServices"/>
+        <!--<security:remember-me services-ref="rememberMeServices"/>-->
     </security:http>
 
     <!-- In file/memory authentication -->
@@ -54,6 +54,7 @@
     -->
 
     <!-- JPA & Hibernate authentication -->
+    <!--
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider user-service-ref="customerService"/>
         <security:authentication-provider ref="rememberMeAuthenticationProvider"/>
@@ -80,8 +81,16 @@
     <bean id="tokenRepository"
           class="com.cognitivenode.security.repository.impl.RememberMeTokenRepositoryImpl">
     </bean>
+    -->
 
     <!-- Embedded LDAP authentication -->
+    <security:authentication-manager>
+        <security:ldap-authentication-provider user-dn-pattern="uid={0},ou=people"
+                                                group-search-base="ou=roles"
+                                                group-search-filter="member={0}"/>
+    </security:authentication-manager>
+
+    <security:ldap-server root="dc=cognitivenode,dc=com" ldif="classpath:users.ldif"/>
 
     <!-- External LDAP authentication -->
 
