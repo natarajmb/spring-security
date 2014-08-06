@@ -11,7 +11,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/home.do">Secure Vault</a></li>
             <sec:authorize access="isAnonymous()">
-                <li class="right"><a href="${pageContext.request.contextPath}/login.do">Login</a></li>
+                <li class="right"><a href="https://localhost:8443/cas/login?service=http://localhost:8080/spring-security/secure/authenticated.do">Login</a></li>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                 <li class="right"><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
